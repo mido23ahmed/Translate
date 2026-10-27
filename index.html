@@ -343,24 +343,33 @@ body::after {
 /* --- Camera Quick Action Card --- */
 .camera-action-card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 18px;
+  flex-direction: column;
+  padding: 14px 16px;
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.12) 100%);
   border: 1px solid rgba(99, 102, 241, 0.3);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+  gap: 12px;
+}
+
+.camera-action-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .camera-action-info {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 .camera-action-icon {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-sm);
   background: var(--accent-gradient);
   display: flex;
@@ -368,22 +377,41 @@ body::after {
   justify-content: center;
   color: #fff;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  flex-shrink: 0;
+}
+
+.camera-action-text {
+  min-width: 0;
 }
 
 .camera-action-text h3 {
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: var(--text-primary);
+  line-height: 1.3;
 }
 
 .camera-action-text p {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .camera-buttons-group {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
+  width: 100%;
+}
+
+.camera-buttons-group .btn {
+  padding: 10px 6px;
+  font-size: 0.85rem;
+  width: 100%;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 /* --- Translator Workspace --- */
@@ -956,15 +984,178 @@ body::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for Mobile & Tablets */
 @media (max-width: 600px) {
-  .app-container {
-    padding: 8px 10px 24px 10px;
-    gap: 12px;
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
   }
+
+  .app-container {
+    padding: 8px 10px calc(24px + env(safe-area-inset-bottom)) 10px;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Header adjustments */
+  .app-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .brand-wrapper {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .app-logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .brand-subtitle {
+    font-size: 0.68rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 160px;
+  }
+
+  .header-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Language Selector Bar */
+  .language-bar {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .custom-select {
+    padding: 8px 6px 8px 24px;
+    font-size: 0.88rem;
+    background-position: left 6px center;
+    background-size: 14px;
+  }
+
+  .swap-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Camera Card adjustments */
+  .camera-action-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .camera-action-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .camera-action-text h3 {
+    font-size: 0.92rem;
+  }
+
+  .camera-action-text p {
+    font-size: 0.7rem;
+    max-width: 170px;
+  }
+
+  #scanCounterBadge {
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .camera-buttons-group {
+    gap: 6px;
+  }
+
+  .camera-buttons-group .btn {
+    padding: 9px 4px;
+    font-size: 0.8rem;
+    gap: 4px;
+  }
+
+  .camera-buttons-group .btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Translator Workspace */
+  .card-box {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
   .card-textarea {
     font-size: 1.05rem;
     min-height: 100px;
+  }
+
+  /* Phrasebook & Word of day */
+  .phrases-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .phrasebook-section {
+    padding: 14px;
+  }
+
+  .section-title {
+    font-size: 0.98rem;
+  }
+
+  .phrasebook-categories {
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .chip-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  /* Modal on Mobile */
+  .modal-card {
+    max-width: 95vw;
+    margin: 8px;
+    max-height: 85vh;
+  }
+
+  .modal-body {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .modal-header, .modal-footer {
+    padding: 12px 16px;
+  }
+
+  .camera-viewfinder {
+    height: 250px;
   }
 }
 
@@ -1284,7 +1475,7 @@ body::after {
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnR3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzYjgyZjYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM2MzY2ZjEiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjOGI1Y2Y2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbG93R3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM2MGE1ZmEiIHN0b3Atb3BhY2l0eT0iMC44Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2MwODRmYyIgc3RvcC1vcGFjaXR5PSIwLjIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciIHg9Ii0xMCUiIHk9Ii0xMCUiIHdpZHRoPSIxMjAlIiBoZWlnaHQ9IjEyMCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTYiIGZsb29kLWNvbG9yPSIjMWUxYjRiIiBmbG9vZC1vcGFjaXR5PSIwLjM1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CgogIDwhLS0gQmFja2dyb3VuZCByb3VuZGVkIHNxdWlyY2xlIC0tPgogIDxyZWN0IHg9IjI0IiB5PSIyNCIgd2lkdGg9IjQ2NCIgaGVpZ2h0PSI0NjQiIHJ4PSIxMDgiIGZpbGw9InVybCgjYmdHcmFkKSIgZmlsdGVyPSJ1cmwoI3NoYWRvdykiLz4KICAKICA8IS0tIFN1YnRsZSBpbm5lciBib3JkZXIgLS0+CiAgPHJlY3QgeD0iMjYiIHk9IjI2IiB3aWR0aD0iNDYwIiBoZWlnaHQ9IjQ2MCIgcng9IjEwNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiIHN0cm9rZS13aWR0aD0iNCIvPgoKICA8IS0tIEdsb2JlIC8gVHJhbnNsYXRpb24gR3JpZCBMaW5lcyAtLT4KICA8ZyBvcGFjaXR5PSIwLjE1IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSI+CiAgICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjE2MCIvPgogICAgPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjI1NiIgcng9IjgwIiByeT0iMTYwIi8+CiAgICA8bGluZSB4MT0iOTYiIHkxPSIyNTYiIHgyPSI0MTYiIHkyPSIyNTYiLz4KICAgIDxsaW5lIHgxPSIxMjAiIHkxPSIxNzYiIHgyPSIzOTIiIHkyPSIxNzYiLz4KICAgIDxsaW5lIHgxPSIxMjAiIHkxPSIzMzYiIHgyPSIzOTIiIHkyPSIzMzYiLz4KICA8L2c+CgogIDwhLS0gTGVmdCBDYXJkOiAnQScgJiAn2LYnIChMYW5ndWFnZXMpIC0tPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDExMCwgMTEwKSI+CiAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE1MCIgcng9IjI4IiBmaWxsPSIjZmZmZmZmIiBmaWx0ZXI9InVybCgjc2hhZG93KSIvPgogICAgPHRleHQgeD0iODAiIHk9IjEwNSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4MiIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iIzNiODJmNiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QTwvdGV4dD4KICA8L2c+CgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI0MiwgMTkwKSI+CiAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE1MCIgcng9IjI4IiBmaWxsPSIjZmZmZmZmIiBmaWx0ZXI9InVybCgjc2hhZG93KSIvPgogICAgPHRleHQgeD0iODAiIHk9IjEwOCIgZm9udC1mYW1pbHk9IidDYWlybycsIHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4OCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iIzhiNWNmNiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2LY8L3RleHQ+CiAgPC9nPgoKICA8IS0tIENhbWVyYSAvIExlbnMgYmFkZ2UgYXQgdGhlIGJvdHRvbSBjZW50ZXIgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTk2LCAzNTApIiBmaWx0ZXI9InVybCgjc2hhZG93KSI+CiAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiByeD0iMjQiIGZpbGw9IiMwZjE3MmEiLz4KICAgIDxyZWN0IHg9IjIiIHk9IjIiIHdpZHRoPSIxMTYiIGhlaWdodD0iNzYiIHJ4PSIyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIDwhLS0gQ2FtZXJhIEJvZHkgLS0+CiAgICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjQwIiByPSIyMiIgZmlsbD0iIzFlMjkzYiIgc3Ryb2tlPSIjMzhiZGY4IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjYwIiBjeT0iNDAiIHI9IjEwIiBmaWxsPSIjMzhiZGY4Ii8+CiAgICA8IS0tIEZsYXNoL0xlbnMgaW5kaWNhdG9yIC0tPgogICAgPGNpcmNsZSBjeD0iOTIiIGN5PSIyNCIgcj0iNSIgZmlsbD0iI2Y1OWUwYiIvPgogIDwvZz4KCiAgPCEtLSBTd2FwIGFycm93cyBpbiBjZW50ZXIgLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjM2LCAxNzUpIiBmaWxsPSIjZmZmZmZmIiBmaWx0ZXI9InVybCgjc2hhZG93KSI+CiAgICA8Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyNiIgZmlsbD0iIzEwYjk4MSIvPgogICAgPHBhdGggZD0iTTEyIDE3IEwyOCAxNyBNMjMgMTIgTDI4IDE3IEwyMyAyMiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+CiAgICA8cGF0aCBkPSJNMjggMjUgTDEyIDI1IE0xNyAzMCBMMTIgMjUgTDE3IDIwIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMy41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="شعار المترجم" class="app-logo">
         <div>
           <h1 class="brand-title">مترجم الذكاء الاصطناعي</h1>
-          <span class="brand-subtitle">ترجمة فورية بالذكاء الاصطناعي والكاميرا</span>
+          <span class="brand-subtitle">ترجمة فورية بالذكاء الاصطناعي</span>
         </div>
       </div>
 
@@ -1339,18 +1530,20 @@ body::after {
 
     <!-- Camera / Image Quick Action Card -->
     <section class="camera-action-card">
-      <div class="camera-action-info">
-        <div class="camera-action-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-            <circle cx="12" cy="13" r="4"/>
-          </svg>
+      <div class="camera-action-header">
+        <div class="camera-action-info">
+          <div class="camera-action-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <div class="camera-action-text">
+            <h3>ترجمة الصور والمستندات</h3>
+            <p>التقط بالكاميرا أو اختر صورة أو مستند PDF</p>
+          </div>
         </div>
-        <div class="camera-action-text">
-          <h3>ترجمة الصور بالكاميرا</h3>
-          <p>صور أي مستند، كتاب، أو لافتة وترجمها في الحال</p>
-          <span id="scanCounterBadge" class="badge badge-success">5 محاولات متبقية اليوم</span>
-        </div>
+        <span id="scanCounterBadge" class="badge badge-success">5 محاولات</span>
       </div>
 
       <div class="camera-buttons-group">
@@ -2591,7 +2784,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!scanCounterBadge) return;
     const scanData = getScanData();
     const remaining = Math.max(0, CONFIG.MAX_DAILY_SCANS - scanData.used);
-    scanCounterBadge.textContent = `${remaining} محاولات متبقية اليوم`;
+    scanCounterBadge.textContent = `${remaining} محاولات`;
     scanCounterBadge.classList.toggle('badge-warning', remaining <= 1);
   }
 
