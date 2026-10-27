@@ -1,7 +1,7 @@
 {
-  "name": "مترجم الذكاء الاصطناعي - AI Translator",
-  "short_name": "مترجم AI",
-  "description": "تطبيق ترجمة احترافي فوري بالذكاء الاصطناعي والكاميرا بين العربية والإنجليزية والفرنسية والألمانية",
+  "name": "A-A Translate | Ahmed Alaa",
+  "short_name": "A-A Translate",
+  "description": "تطبيق الترجمة الاحترافي بالذكاء الاصطناعي والكاميرا بين اللغات العربية والإنجليزية والفرنسية والألمانية. تطوير Ahmed Alaa",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -9,13 +9,23 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "./icons/icon.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
+      "src": "./icons/icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
       "purpose": "any maskable"
     }
   ],
   "lang": "ar",
   "dir": "rtl",
-  "categories": ["utilities", "productivity", "education"]
+  "categories": [
+    "utilities",
+    "productivity",
+    "education"
+  ]
 }
