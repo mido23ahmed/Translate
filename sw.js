@@ -40,7 +40,9 @@ self.addEventListener('fetch', (event) => {
     event.request.url.includes('googleapis.com') ||
     event.request.url.includes('mymemory') ||
     event.request.url.includes('pagead2.googlesyndication.com') ||
-    event.request.url.includes('googleads')
+    event.request.url.includes('googleads') ||
+    event.request.url.includes('emrld.ltd') ||
+    event.request.url.includes('travelpayouts')
   ) {
     return;
   }

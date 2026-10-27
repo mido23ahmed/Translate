@@ -29,6 +29,17 @@
   <!-- Google AdSense Official Script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9564340004388044" crossorigin="anonymous"></script>
 
+  <!-- Travelpayouts Drive Monetization Script (Partner ID: 592118) -->
+  <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1" data-cmp-ab="2">
+    (function () {
+        var script = document.createElement("script");
+        script.async = 1;
+        script.setAttribute("data-cmp-ab","2");
+        script.src = 'https://emrld.ltd/NTkyMTE4.js?t=592118';
+        document.head.appendChild(script);
+    })();
+  </script>
+
   <!-- Stylesheet -->
   <style>
 /* ==========================================================================
@@ -1314,7 +1325,19 @@ body::after {
 .phrase-translations-preview {
   font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
+}
+
+.flag-pill {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  margin-left: 5px;
+  letter-spacing: 0.5px;
 }
 
 .phrase-actions {
@@ -3211,9 +3234,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <button class="tool-btn btn-sm-speak" style="width:28px;height:28px;" title="نطق بالإنجليزية">🔉</button>
         </div>
         <div class="phrase-translations-preview">
-          <div>🇬🇧 ${item.en}</div>
-          <div>🇫🇷 ${item.fr}</div>
-          <div>🇩🇪 ${item.de}</div>
+          <div><span class="flag-pill">EN</span> ${item.en}</div>
+          <div><span class="flag-pill">FR</span> ${item.fr}</div>
+          <div><span class="flag-pill">DE</span> ${item.de}</div>
         </div>
         <div class="phrase-actions">
           <button class="btn-icon-text btn-use-phrase">ترجم بالصندوق الرئيسي</button>
