@@ -26,6 +26,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Google AdSense Official Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9564340004388044" crossorigin="anonymous"></script>
+
   <!-- Stylesheet -->
   <style>
 /* ==========================================================================
@@ -1914,17 +1917,10 @@ body::after {
 
         <!-- Monetization & AdSense -->
         <div class="form-group">
-          <label class="form-label">إعدادات تحقيق الدخل والأرباح (Google AdSense):</label>
-          <p class="form-hint">عند تسجيلك في جوجل أدسنس، ضع معرف حسابك الناشر (Publisher ID) لعرض إعلاناتك وجني الأرباح:</p>
-          <input type="text" id="adClientInput" class="form-input" placeholder="مثال: ca-pub-1234567890123456">
-        </div>
-
-        <!-- Local Payments / Support -->
-        <div class="form-group">
-          <label class="form-label">رقم فودافون كاش أو إنستاباي لتلقي الاشتراكات:</label>
-          <p class="form-hint">سيظهر للمستخدمين عند الرغبة في الترقية أو الدعم:</p>
-          <input type="text" id="donationPhoneInput" class="form-input" placeholder="مثال: 01012345678">
-          <button id="saveAdSettingsBtn" class="btn btn-secondary btn-sm" style="margin-top:6px;">حفظ إعدادات الأرباح</button>
+          <label class="form-label">إعدادات أرباح إعلانات جوجل (Google AdSense):</label>
+          <p class="form-hint">معرف حسابك في جوجل أدسنس (Publisher ID):</p>
+          <input type="text" id="adClientInput" class="form-input" value="ca-pub-9564340004388044" placeholder="ca-pub-9564340004388044">
+          <button id="saveAdSettingsBtn" class="btn btn-secondary btn-sm" style="margin-top:8px;">حفظ معرف الإعلانات</button>
         </div>
         <hr style="border:0; border-top:1px solid var(--border-color);">
         <div style="text-align: center; padding: 10px 0;">
@@ -2852,18 +2848,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showScanLimitModal() {
-    const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_SETTINGS) || '{}');
-    const phone = settings.donationPhone || '010XXXXXXXX';
+    const msg = `لقد استنفذت الـ ${CONFIG.MAX_DAILY_SCANS} محاولات المجانية لليوم للكاميرا!\n\nهل تريد مشاهدة إعلان قصير وسريع لتجديد 5 محاولات جديدة فوراً مجاناً؟`;
 
-    const msg = `
-      لقد استنفذت الـ ${CONFIG.MAX_DAILY_SCANS} محاولات المجانية لليوم للكاميرا!
-      
-      للحصول على محاولات إضافية فوراً:
-      1. شاهد إعلاناً قصيراً لتجديد 5 محاولات جديدة مجاناً.
-      2. أو يمكنك دعم التطبيق باشتراك رمزي غير محدود عبر فودافون كاش / إنستاباي: ${phone}
-    `;
-
-    const answer = confirm(msg + '\n\nهل تريد مشاهدة الإعلان الآن للتجديد؟');
+    const answer = confirm(msg);
     if (answer) {
       simulateRewardAd();
     }
@@ -2996,29 +2983,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadSettings() {
     const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_SETTINGS) || '{}');
-    if (adClientInput && settings.adClient) {
-      adClientInput.value = settings.adClient;
-    }
-    if (donationPhoneInput && settings.donationPhone) {
-      donationPhoneInput.value = settings.donationPhone;
-    }
-    if (donationInfoBox && settings.donationPhone) {
-      donationInfoBox.textContent = `فودافون كاش / إنستاباي: ${settings.donationPhone}`;
+    if (adClientInput) {
+      adClientInput.value = settings.adClient || 'ca-pub-9564340004388044';
     }
   }
 
   saveAdSettingsBtn?.addEventListener('click', () => {
     const adClient = adClientInput?.value.trim() || '';
-    const donationPhone = donationPhoneInput?.value.trim() || '';
 
-    const settings = { adClient, donationPhone };
+    const settings = { adClient };
     localStorage.setItem(CONFIG.STORAGE_SETTINGS, JSON.stringify(settings));
 
-    if (donationInfoBox) {
-      donationInfoBox.textContent = donationPhone ? `فودافون كاش / إنستاباي: ${donationPhone}` : '';
-    }
-
-    showToast('تم حفظ إعدادات الأرباح والإعلانات!');
+    showToast('تم حفظ معرف Google AdSense بنجاح!');
   });
 
   // --- PDF Translation & Rewarded Ads ---
