@@ -42,7 +42,8 @@ self.addEventListener('fetch', (event) => {
     event.request.url.includes('pagead2.googlesyndication.com') ||
     event.request.url.includes('googleads') ||
     event.request.url.includes('emrld.ltd') ||
-    event.request.url.includes('travelpayouts')
+    event.request.url.includes('travelpayouts') ||
+    event.request.url.includes('bauval.org')
   ) {
     return;
   }
