@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>مترجم الذكاء الاصطناعي | ترجمة نصوص وصور وكاميرا (عربي - إنجليزي - فرنسي - ألماني)</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="تطبيق ترجمة احترافي فوري بالذكاء الاصطناعي مع ميزة التصوير المباشر بالكاميرا والتعرف الضوئي على النصوص (OCR) بين اللغات العربية والإنجليزية والفرنسية والألمانية.">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="مترجم AI">
+  
+  <!-- PWA Manifest & Favicon -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Top PWA Install Banner (Appears on mobile) -->
+    <div id="pwaInstallBanner" class="pwa-banner hidden">
+      <div class="pwa-content">
+        <img src="./icons/icon.svg" alt="App Icon" width="36" height="36" style="border-radius: 8px;">
+        <div class="pwa-text">
+          <h4>تثبيت التطبيق على هاتفك</h4>
+          <p>استخدم التطبيق كأنه تطبيق موبايل رسمي بدون متجر</p>
+        </div>
+      </div>
+      <div class="pwa-actions">
+        <button id="pwaInstallBtn" class="btn btn-primary btn-sm">تثبيت الآن</button>
+        <button id="pwaDismissBtn" class="tool-btn" title="إغلاق">✕</button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-wrapper">
+        <img src="./icons/icon.svg" alt="شعار المترجم" class="app-logo">
+        <div>
+          <h1 class="brand-title">مترجم الذكاء الاصطناعي</h1>
+          <span class="brand-subtitle">ترجمة فورية بالذكاء الاصطناعي والكاميرا</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="historyBtn" class="btn-icon" title="سجل الترجمات">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </button>
+
+        <button id="settingsBtn" class="btn-icon" title="الإعدادات ومفتاح AI والربح">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+
+        <button id="toggleThemeBtn" class="btn-icon" title="تبديل الوضع الليلي / الفاتح">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Language Selector Bar -->
+    <section class="language-bar">
+      <div class="lang-select-wrapper">
+        <select id="sourceLang" class="custom-select" aria-label="لغة المصدر">
+          <option value="auto">كشف تلقائي</option>
+          <option value="ar" selected>العربية 🇪🇬</option>
+          <option value="en">English 🇬🇧</option>
+          <option value="fr">Français 🇫🇷</option>
+          <option value="de">Deutsch 🇩🇪</option>
+        </select>
+      </div>
+
+      <button id="swapLangsBtn" class="swap-btn" title="تبديل اللغات">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M7 16V4M7 4L3 8M7 4L11 8M17 8V20M17 20L21 16M17 20L13 16"/>
+        </svg>
+      </button>
+
+      <div class="lang-select-wrapper">
+        <select id="targetLang" class="custom-select" aria-label="لغة الهدف">
+          <option value="en" selected>English 🇬🇧</option>
+          <option value="ar">العربية 🇪🇬</option>
+          <option value="fr">Français 🇫🇷</option>
+          <option value="de">Deutsch 🇩🇪</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Camera / Image Quick Action Card -->
+    <section class="camera-action-card">
+      <div class="camera-action-info">
+        <div class="camera-action-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+        <div class="camera-action-text">
+          <h3>ترجمة الصور بالكاميرا</h3>
+          <p>صور أي مستند، كتاب، أو لافتة وترجمها في الحال</p>
+          <span id="scanCounterBadge" class="badge badge-success">5 محاولات متبقية اليوم</span>
+        </div>
+      </div>
+
+      <div class="camera-buttons-group">
+        <button id="openCameraBtn" class="btn btn-primary btn-sm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          الكاميرا
+        </button>
+
+        <button id="uploadImageBtn" class="btn btn-secondary btn-sm" title="رفع صورة من المعرض">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
+          رفع صورة
+        </button>
+
+        <button id="uploadPdfBtn" class="btn btn-secondary btn-sm" title="ترجمة مستند أو كتاب PDF">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+          ملف PDF
+        </button>
+        <input type="file" id="imageUploadInput" accept="image/*" class="hidden">
+        <input type="file" id="pdfUploadInput" accept=".pdf,application/pdf" class="hidden">
+      </div>
+    </section>
+
+    <!-- Top Monetization / Ad Unit -->
+    <div id="adUnitBanner" class="ad-container">
+      <span class="ad-badge">مساحة إعلانية • AD SPACE</span>
+      <div class="ad-mock-content">
+        <div class="ad-mock-icon">★</div>
+        <div class="ad-mock-text">
+          <div class="ad-mock-title">إعلانات Google AdSense جاهزة للتفعيل</div>
+          <div class="ad-mock-desc">بمجرد إضافة معرف حسابك في الإعدادات ستبدأ الأرباح مباشرة</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Translator Workspace -->
+    <main class="translator-workspace">
+      
+      <!-- Source Input Box -->
+      <div class="card-box">
+        <div class="card-header-bar">
+          <span>النص المراد ترجمته</span>
+          <span id="charCounter" class="char-counter">0 حرف</span>
+        </div>
+
+        <textarea 
+          id="sourceText" 
+          class="card-textarea" 
+          placeholder="اكتب أو الصق النص هنا ليتم ترجمته تلقائياً..." 
+          dir="rtl"
+          rows="4"></textarea>
+
+        <div class="card-footer-bar">
+          <div class="card-actions-left">
+            <button id="speakSourceBtn" class="tool-btn" title="نطق النص صوتياً">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </button>
+            <button id="clearSourceBtn" class="tool-btn hidden" title="مسح النص">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="card-actions-right">
+            <div id="loadingIndicator" class="loading-indicator">
+              <div class="spinner"></div>
+              <span>جاري الترجمة...</span>
+            </div>
+            <button id="translateBtn" class="btn btn-primary btn-sm">
+              ترجم الآن
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Output Box -->
+      <div class="card-box">
+        <div class="card-header-bar">
+          <span>النص المترجم</span>
+          <div class="card-actions-left">
+            <button id="copyTargetBtn" class="tool-btn" title="نسخ الترجمة">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+            <button id="shareBtn" class="tool-btn" title="مشاركة الترجمة">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <textarea 
+          id="targetText" 
+          class="card-textarea" 
+          placeholder="الترجمة ستظهر هنا مباشرة وبدقة عالية..." 
+          readonly 
+          rows="4"></textarea>
+
+        <div class="card-footer-bar">
+          <div class="card-actions-left">
+            <button id="speakTargetBtn" class="tool-btn" title="نطق الترجمة">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </button>
+          </div>
+          <div id="donationInfoBox" class="brand-subtitle"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Word of the Day Widget (يزيد وقت بقاء الزائر) -->
+    <section class="word-of-day-card">
+      <div class="word-card-header">
+        <span class="badge badge-warning">💡 كلمة اليوم الذكية</span>
+        <button id="refreshWordBtn" class="tool-btn" title="تغيير الكلمة">🔄</button>
+      </div>
+      <div class="word-card-content">
+        <div class="word-original">
+          <h4 id="wodOriginal">Erfolg</h4>
+          <span id="wodLang">الألمانية (Deutsch)</span>
+          <button id="speakWodBtn" class="tool-btn" style="width:30px;height:30px;" title="نطق الكلمة">🔉</button>
+        </div>
+        <div class="word-translations">
+          <div><span class="lang-tag">عربي:</span> <strong id="wodAr">نجاح</strong></div>
+          <div><span class="lang-tag">English:</span> <strong id="wodEn">Success</strong></div>
+          <div><span class="lang-tag">Français:</span> <strong id="wodFr">Succès</strong></div>
+        </div>
+        <p class="word-example" id="wodExample">"Erfolg kommt durch Fleiß" (النجاح يأتي بالاجتهاد)</p>
+      </div>
+    </section>
+
+    <!-- Travel & Daily Phrasebook Section (عالي التفاعل) -->
+    <section class="phrasebook-section">
+      <div class="phrasebook-header">
+        <div>
+          <h3 class="section-title">✈️ دليل عبارات السفر والمحادثة السريعة</h3>
+          <p class="section-subtitle">جمل جاهزة ومترجمة باللغات الأربع مع نطق صوتي فوري</p>
+        </div>
+      </div>
+      <div class="phrasebook-categories" id="phraseCategories">
+        <button class="chip-btn active" data-cat="airport">🛫 المطار والسفر</button>
+        <button class="chip-btn" data-cat="hotel">🏨 الفندق والإقامة</button>
+        <button class="chip-btn" data-cat="restaurant">🍽️ المطعم والطعام</button>
+        <button class="chip-btn" data-cat="emergency">🚨 الطوارئ والصحة</button>
+      </div>
+      <div class="phrases-grid" id="phrasesGrid"></div>
+    </section>
+
+    <!-- Affiliate Recommendations (أرباح إضافية بالعمولة للمسافرين) -->
+    <section class="affiliate-section">
+      <div class="affiliate-title">
+        <span>⭐ عروض وخدمات مميزة للمسافرين ومتعلمي اللغات</span>
+      </div>
+      <div class="affiliate-grid">
+        <a href="https://www.airalo.com" target="_blank" rel="noopener" class="affiliate-card">
+          <div class="aff-icon">📶</div>
+          <div class="aff-info">
+            <h4>شريحة إنترنت سياحية eSIM</h4>
+            <p>إنترنت فوري في أكثر من 200 دولة بدون تغيير خطك</p>
+          </div>
+          <span class="aff-tag">وفر 15%</span>
+        </a>
+        <a href="https://www.booking.com" target="_blank" rel="noopener" class="affiliate-card">
+          <div class="aff-icon">🏨</div>
+          <div class="aff-info">
+            <h4>حجوزات طيران وفنادق بأسعار مخفضة</h4>
+            <p>أفضل الخصومات لرحلات السفر والسياحة حول العالم</p>
+          </div>
+          <span class="aff-tag">خصم حقيقي</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Bottom Monetization / Ad Unit -->
+    <div id="adUnitBottom" class="ad-container">
+      <span class="ad-badge">مساحة إعلانية • BANNER</span>
+      <div class="ad-mock-content">
+        <div class="ad-mock-icon">⚡</div>
+        <div class="ad-mock-text">
+          <div class="ad-mock-title">تطبيق خفيف وسريع ويدعم العمل أوفلاين</div>
+          <div class="ad-mock-desc">احفظ الموقع في شاشتك الرئيسية للوصول الفوري</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Camera & OCR Modal -->
+  <div id="cameraModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          ترجمة الصور بالكاميرا
+        </h3>
+        <button id="closeCameraModal" class="tool-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Live Camera Viewfinder -->
+        <div class="camera-viewfinder">
+          <video id="cameraFeed" class="camera-video" playsinline autoplay muted></video>
+          <div class="laser-scanner"></div>
+          <canvas id="cameraCanvas" style="display:none;"></canvas>
+        </div>
+
+        <div class="camera-controls-bar">
+          <button id="switchCameraFacingBtn" class="btn-icon" title="تبديل الكاميرا الخلفية / الأمامية">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 10c0-4.418-3.582-8-8-8s-8 3.582-8 8c0 2.22 0 2.22-2 2.22M4 14c0 4.418 3.582 8 8 8s8-3.582 8-8c0-2.22 0-2.22 2-2.22"/>
+              <polyline points="1 7 4 10 7 7"/><polyline points="23 17 20 14 17 17"/>
+            </svg>
+          </button>
+
+          <button id="capturePhotoBtn" class="shutter-btn" title="التقاط الصورة الآن"></button>
+        </div>
+
+        <!-- Image Processed Result View -->
+        <div id="imageResultSection" class="image-result-box hidden">
+          <img id="imagePreviewImg" class="preview-thumbnail" alt="معاينة الصورة الملتقطة">
+          
+          <div class="result-card-extracted">
+            <div class="result-label">النص المستخرج من الصورة:</div>
+            <div id="extractedText" class="result-content"></div>
+          </div>
+
+          <div class="result-card-translated">
+            <div class="result-label">الترجمة الفورية:</div>
+            <div id="imageTranslatedText" class="result-content"></div>
+          </div>
+
+          <button id="useInMainTranslatorBtn" class="btn btn-primary">
+            إرسال إلى صندوق الترجمة الرئيسي
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. History Modal -->
+  <div id="historyModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          سجل الترجمات الأخيرة
+        </h3>
+        <button id="closeHistoryModal" class="tool-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="historyList"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="clearHistoryBtn" class="btn btn-secondary btn-sm">
+          مسح السجل بالكامل
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Settings & Monetization Modal -->
+  <div id="settingsModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          الإعدادات والذكاء الاصطناعي والأرباح
+        </h3>
+        <button id="closeSettingsModal" class="tool-btn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Gemini AI Key Section -->
+        <div class="form-group">
+          <label class="form-label" for="apiKeyInput">مفتاح الذكاء الاصطناعي (Gemini API Key):</label>
+          <div id="apiKeyStatus"></div>
+          <input type="password" id="apiKeyInput" class="form-input" placeholder="ألصق مفتاح الذكاء الاصطناعي هنا...">
+          <button id="saveApiKeyBtn" class="btn btn-primary btn-sm" style="margin-top:6px;">حفظ المفتاح</button>
+          
+          <div class="info-banner" style="margin-top:8px;">
+            💡 <strong>كيف تحصل على المفتاح مجاناً 100%؟</strong><br>
+            ادخل على موقع <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a> بحساب جوجل الخاص بك واضغط على <strong>Create API Key</strong>، وانسخه هنا مجاناً.
+          </div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--border-color);">
+
+        <!-- Monetization & AdSense -->
+        <div class="form-group">
+          <label class="form-label">إعدادات تحقيق الدخل والأرباح (Google AdSense):</label>
+          <p class="form-hint">عند تسجيلك في جوجل أدسنس، ضع معرف حسابك الناشر (Publisher ID) لعرض إعلاناتك وجني الأرباح:</p>
+          <input type="text" id="adClientInput" class="form-input" placeholder="مثال: ca-pub-1234567890123456">
+        </div>
+
+        <!-- Local Payments / Support -->
+        <div class="form-group">
+          <label class="form-label">رقم فودافون كاش أو إنستاباي لتلقي الاشتراكات:</label>
+          <p class="form-hint">سيظهر للمستخدمين عند الرغبة في الترقية أو الدعم:</p>
+          <input type="text" id="donationPhoneInput" class="form-input" placeholder="مثال: 01012345678">
+          <button id="saveAdSettingsBtn" class="btn btn-secondary btn-sm" style="margin-top:6px;">حفظ إعدادات الأرباح</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Rewarded Ad Modal (قبل فتح/تحميل ترجمة الـ PDF) -->
+  <div id="rewardedAdModal" class="modal-overlay">
+    <div class="modal-card" style="text-align: center; max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="margin: 0 auto;">🎁 فتح ترجمة المستند بالذكاء الاصطناعي</h3>
+      </div>
+      <div class="modal-body">
+        <div class="reward-pulse-icon">⚡</div>
+        <h4 style="font-size:1.1rem; color:var(--text-primary); margin-bottom: 6px;">جاري إعداد ترجمة المستند الكامل...</h4>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom: 12px;">
+          الترجمة مجانية بالكامل. يرجى الانتظار بضع ثوانٍ لدعم استمرار الخدمة المجانية:
+        </p>
+
+        <!-- Simulated / Real High-eCPM Ad Unit -->
+        <div class="reward-ad-box">
+          <span class="ad-badge">إعلان ممول • SPONSORED</span>
+          <div class="ad-mock-video">
+            <div class="ad-video-icon">▶</div>
+            <div style="font-weight:700; font-size:0.95rem;">عروض وتخفيضات السفر واللغات</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">خصومات حصرية على حجز الطيران وتطبيقات التعلم</div>
+          </div>
+        </div>
+
+        <div id="adCountdownText" style="font-weight:800; font-size:1.05rem; color:var(--accent-primary); margin-top:12px;">
+          جاري تجهيز الملف... (<span id="adCountdownVal">4</span> ثوانٍ)
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: center;">
+        <button id="skipAdBtn" class="btn btn-primary" disabled>
+          تخطي الإعلان وعرض الترجمة
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. PDF Translation Result Modal -->
+  <div id="pdfResultModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+          نتيجة ترجمة ملف الـ PDF
+        </h3>
+        <button id="closePdfModal" class="tool-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="pdf-info-bar">
+          <span id="pdfFileName" class="badge badge-neutral">ملف مستند</span>
+          <span id="pdfWordCount" class="badge badge-success">0 كلمة</span>
+          <span id="pdfTargetLangBadge" class="badge badge-warning">اللغة المترجمة</span>
+        </div>
+        <textarea id="pdfResultText" class="card-textarea" style="min-height: 260px; background:var(--bg-primary); padding:14px; border-radius:var(--radius-sm); border:1px solid var(--border-color); line-height:1.7;" readonly></textarea>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap; gap:8px;">
+        <div style="display:flex; gap:8px;">
+          <button id="copyPdfResultBtn" class="btn btn-secondary btn-sm">📋 نسخ الترجمة</button>
+          <button id="downloadPdfTextBtn" class="btn btn-primary btn-sm">📥 تحميل الترجمة (TXT)</button>
+        </div>
+        <button id="sendPdfToMainBtn" class="btn btn-secondary btn-sm">إرسال للصندوق الرئيسي</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="./js/gemini-ai.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

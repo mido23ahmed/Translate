@@ -1,0 +1,21 @@
+{
+  "name": "مترجم الذكاء الاصطناعي - AI Translator",
+  "short_name": "مترجم AI",
+  "description": "تطبيق ترجمة احترافي فوري بالذكاء الاصطناعي والكاميرا بين العربية والإنجليزية والفرنسية والألمانية",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["utilities", "productivity", "education"]
+}
