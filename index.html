@@ -1610,7 +1610,7 @@ body::after {
             <p>التقط بالكاميرا أو اختر صورة أو مستند PDF</p>
           </div>
         </div>
-        <span id="scanCounterBadge" class="badge badge-success">5 محاولات</span>
+        <span id="scanCounterBadge" class="badge badge-success">مفتوح مجاناً ⚡</span>
       </div>
 
       <div class="camera-buttons-group">
@@ -1641,16 +1641,7 @@ body::after {
     </section>
 
     <!-- Top Monetization / Ad Unit -->
-    <div id="adUnitBanner" class="ad-container">
-      <span class="ad-badge">مساحة إعلانية • AD SPACE</span>
-      <div class="ad-mock-content">
-        <div class="ad-mock-icon">★</div>
-        <div class="ad-mock-text">
-          <div class="ad-mock-title">إعلانات Google AdSense جاهزة للتفعيل</div>
-          <div class="ad-mock-desc">بمجرد إضافة معرف حسابك في الإعدادات ستبدأ الأرباح مباشرة</div>
-        </div>
-      </div>
-    </div>
+    <div id="adUnitBanner" class="ad-container" style="display: none;"></div>
 
     <!-- Main Translator Workspace -->
     <main class="translator-workspace">
@@ -2799,23 +2790,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function canPerformScan() {
-    const scanData = getScanData();
-    return scanData.used < CONFIG.MAX_DAILY_SCANS;
+    return true; // مفتوح بالكامل بدون أي حدود أو عد
   }
 
   function decrementScanCounter() {
-    const scanData = getScanData();
-    scanData.used += 1;
-    localStorage.setItem(CONFIG.STORAGE_SCANS, JSON.stringify(scanData));
+    // مفتوح بالكامل حالياً بدون عد
     updateScanCounterUI();
   }
 
   function updateScanCounterUI() {
     if (!scanCounterBadge) return;
-    const scanData = getScanData();
-    const remaining = Math.max(0, CONFIG.MAX_DAILY_SCANS - scanData.used);
-    scanCounterBadge.textContent = `${remaining} محاولات`;
-    scanCounterBadge.classList.toggle('badge-warning', remaining <= 1);
+    scanCounterBadge.textContent = 'مفتوح مجاناً ⚡';
+    scanCounterBadge.classList.remove('badge-warning');
+    scanCounterBadge.classList.add('badge-success');
   }
 
   function showScanLimitModal() {
@@ -2963,7 +2950,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         pendingPdfBase64 = event.target.result;
-        showRewardedAdForPdf();
+        // ترجمة فورية ومفتوحة بدون إعلانات أو انتظار مؤقتاً
+        processPdfTranslation(pendingPdfBase64, pendingPdfFile.name);
       };
       reader.readAsDataURL(file);
       pdfUploadInput.value = '';
