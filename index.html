@@ -1559,12 +1559,6 @@ body::after {
           </svg>
         </button>
 
-        <button id="settingsBtn" class="btn-icon" title="الإعدادات ومفتاح AI والربح">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </button>
-
         <button id="toggleThemeBtn" class="btn-icon" title="تبديل الوضع الليلي / الفاتح">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -1911,68 +1905,7 @@ body::after {
     </div>
   </div>
 
-  <!-- 3. Settings Modal (User-Facing) -->
-  <div id="settingsModal" class="modal-overlay">
-    <div class="modal-card" style="max-width: 480px;">
-      <div class="modal-header">
-        <h3 class="modal-title">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-          إعدادات التطبيق
-        </h3>
-        <button id="closeSettingsModal" class="tool-btn">✕</button>
-      </div>
 
-      <div class="modal-body">
-        
-        <!-- Setting 1: Theme -->
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
-          <div>
-            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">المظهر الداكن (Dark Mode)</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">مريح للعين وموفر للبطارية</div>
-          </div>
-          <button id="toggleThemeInSettingsBtn" class="btn btn-secondary btn-sm">تبديل المظهر 🌓</button>
-        </div>
-
-        <!-- Setting 2: Speech Rate -->
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
-          <div>
-            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">سرعة النطق الصوتي</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">التحكم في سرعة قراءة الترجمة</div>
-          </div>
-          <select id="speechRateSelect" class="lang-select" style="width:115px; font-size:0.85rem; padding:6px 8px;">
-            <option value="1">عادي (1.0x)</option>
-            <option value="0.8">هادئ (0.8x)</option>
-            <option value="0.6">بطيء (0.6x)</option>
-          </select>
-        </div>
-
-        <!-- Setting 3: AI Engine Status -->
-        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
-          <div>
-            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">محرك الذكاء الاصطناعي</div>
-            <div style="font-size:0.8rem; color:var(--text-muted);">الترجمة الفورية وقراءة الكاميرا والـ PDF</div>
-          </div>
-          <span class="badge badge-success">✓ نشط ومجاني 100%</span>
-        </div>
-
-        <!-- About Developer & Academy Section -->
-        <div style="text-align: center; padding: 20px 0 6px;">
-          <img src="./icon-192.png" alt="A-A Translate" style="width:58px; height:58px; border-radius:14px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); margin-bottom:8px;">
-          <h4 style="color:var(--text-primary); font-weight:800; font-size:1.15rem; margin:0;">A-A Translate</h4>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:4px 0 8px;">تطبيق الترجمة الاحترافي الفوري بالذكاء الاصطناعي والكاميرا</p>
-          <div style="font-size:0.9rem; color:#38bdf8; font-weight:800;">إشراف وتطوير: Ahmed Alaa</div>
-          <div style="margin-top:12px;">
-            <a href="https://aa-academy-ten.vercel.app/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; color:#818cf8; text-decoration:none; padding:7px 14px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.25); border-radius:20px; font-weight:700; transition:all 0.2s;">
-              🎓 زيارة أكاديمية A.A Academy
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 
   <!-- 4. Rewarded Ad Modal (قبل فتح/تحميل ترجمة الـ PDF) -->
   <div id="rewardedAdModal" class="modal-overlay">
@@ -2991,25 +2924,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Settings Modal ---
-  let currentSpeechRate = 1.0;
-  const speechRateSelect = document.getElementById('speechRateSelect');
-  speechRateSelect?.addEventListener('change', () => {
-    currentSpeechRate = parseFloat(speechRateSelect.value) || 1.0;
-    showToast(`تم ضبط سرعة الصوت على ${currentSpeechRate}x`);
-  });
 
-  document.getElementById('toggleThemeInSettingsBtn')?.addEventListener('click', () => {
-    toggleTheme();
-  });
-
-  settingsBtn?.addEventListener('click', () => {
-    settingsModal.classList.add('active');
-  });
-
-  closeSettingsModal?.addEventListener('click', () => {
-    settingsModal.classList.remove('active');
-  });
 
   // --- PDF Translation & Rewarded Ads ---
   const uploadPdfBtn = document.getElementById('uploadPdfBtn');
