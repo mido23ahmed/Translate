@@ -1911,50 +1911,64 @@ body::after {
     </div>
   </div>
 
-  <!-- 3. Settings & Monetization Modal -->
+  <!-- 3. Settings Modal (User-Facing) -->
   <div id="settingsModal" class="modal-overlay">
-    <div class="modal-card">
+    <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header">
         <h3 class="modal-title">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
           </svg>
-          الإعدادات والذكاء الاصطناعي والأرباح
+          إعدادات التطبيق
         </h3>
         <button id="closeSettingsModal" class="tool-btn">✕</button>
       </div>
 
       <div class="modal-body">
         
-        <!-- Gemini AI Key Section -->
-        <div class="form-group">
-          <label class="form-label" for="apiKeyInput">مفتاح الذكاء الاصطناعي (Gemini API Key):</label>
-          <div id="apiKeyStatus"></div>
-          <input type="password" id="apiKeyInput" class="form-input" placeholder="ألصق مفتاح الذكاء الاصطناعي هنا...">
-          <button id="saveApiKeyBtn" class="btn btn-primary btn-sm" style="margin-top:6px;">حفظ المفتاح</button>
-          
-          <div class="info-banner" style="margin-top:8px;">
-            💡 <strong>كيف تحصل على المفتاح مجاناً 100%؟</strong><br>
-            ادخل على موقع <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a> بحساب جوجل الخاص بك واضغط على <strong>Create API Key</strong>، وانسخه هنا مجاناً.
+        <!-- Setting 1: Theme -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
+          <div>
+            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">المظهر الداكن (Dark Mode)</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">مريح للعين وموفر للبطارية</div>
+          </div>
+          <button id="toggleThemeInSettingsBtn" class="btn btn-secondary btn-sm">تبديل المظهر 🌓</button>
+        </div>
+
+        <!-- Setting 2: Speech Rate -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
+          <div>
+            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">سرعة النطق الصوتي</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">التحكم في سرعة قراءة الترجمة</div>
+          </div>
+          <select id="speechRateSelect" class="lang-select" style="width:115px; font-size:0.85rem; padding:6px 8px;">
+            <option value="1">عادي (1.0x)</option>
+            <option value="0.8">هادئ (0.8x)</option>
+            <option value="0.6">بطيء (0.6x)</option>
+          </select>
+        </div>
+
+        <!-- Setting 3: AI Engine Status -->
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--border-color);">
+          <div>
+            <div style="font-weight:700; color:var(--text-primary); font-size:0.95rem;">محرك الذكاء الاصطناعي</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">الترجمة الفورية وقراءة الكاميرا والـ PDF</div>
+          </div>
+          <span class="badge badge-success">✓ نشط ومجاني 100%</span>
+        </div>
+
+        <!-- About Developer & Academy Section -->
+        <div style="text-align: center; padding: 20px 0 6px;">
+          <img src="./icon-192.png" alt="A-A Translate" style="width:58px; height:58px; border-radius:14px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); margin-bottom:8px;">
+          <h4 style="color:var(--text-primary); font-weight:800; font-size:1.15rem; margin:0;">A-A Translate</h4>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin:4px 0 8px;">تطبيق الترجمة الاحترافي الفوري بالذكاء الاصطناعي والكاميرا</p>
+          <div style="font-size:0.9rem; color:#38bdf8; font-weight:800;">إشراف وتطوير: Ahmed Alaa</div>
+          <div style="margin-top:12px;">
+            <a href="https://aa-academy-ten.vercel.app/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; color:#818cf8; text-decoration:none; padding:7px 14px; background:rgba(99,102,241,0.12); border:1px solid rgba(99,102,241,0.25); border-radius:20px; font-weight:700; transition:all 0.2s;">
+              🎓 زيارة أكاديمية A.A Academy
+            </a>
           </div>
         </div>
-
-        <hr style="border:0; border-top:1px solid var(--border-color);">
-
-        <!-- Monetization & AdSense -->
-        <div class="form-group">
-          <label class="form-label">إعدادات أرباح إعلانات جوجل (Google AdSense):</label>
-          <p class="form-hint">معرف حسابك في جوجل أدسنس (Publisher ID):</p>
-          <input type="text" id="adClientInput" class="form-input" value="ca-pub-9564340004388044" placeholder="ca-pub-9564340004388044">
-          <button id="saveAdSettingsBtn" class="btn btn-secondary btn-sm" style="margin-top:8px;">حفظ معرف الإعلانات</button>
-        </div>
-        <hr style="border:0; border-top:1px solid var(--border-color);">
-        <div style="text-align: center; padding: 10px 0;">
-          <h4 style="color:var(--text-primary); font-weight:800; font-size:1.1rem;">A-A Translate</h4>
-          <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:4px;">تطبيق الترجمة الاحترافي الفوري بالذكاء الاصطناعي والكاميرا</p>
-          <div style="font-size:0.85rem; color:#38bdf8; font-weight:700; margin-top:6px;">A-A Translate - إشراف وتطوير: Ahmed Alaa</div>
-        </div>
-
 
       </div>
     </div>
@@ -2460,10 +2474,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Initialization ---
   initTheme();
-  loadSettings();
   loadHistory();
   updateScanCounterUI();
-  checkApiKeyStatus();
 
   // Register Service Worker
   if ('serviceWorker' in navigator) {
@@ -2656,7 +2668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     utterance.lang = speechLangMap[langCode] || 'ar-SA';
-    utterance.rate = 0.95;
+    utterance.rate = currentSpeechRate || 0.95;
     utterance.pitch = 1.0;
 
     window.speechSynthesis.speak(utterance);
@@ -2979,48 +2991,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Settings & Monetization Modal ---
+  // --- Settings Modal ---
+  let currentSpeechRate = 1.0;
+  const speechRateSelect = document.getElementById('speechRateSelect');
+  speechRateSelect?.addEventListener('change', () => {
+    currentSpeechRate = parseFloat(speechRateSelect.value) || 1.0;
+    showToast(`تم ضبط سرعة الصوت على ${currentSpeechRate}x`);
+  });
+
+  document.getElementById('toggleThemeInSettingsBtn')?.addEventListener('click', () => {
+    toggleTheme();
+  });
+
   settingsBtn?.addEventListener('click', () => {
-    apiKeyInput.value = window.GeminiEngine.getApiKey();
-    checkApiKeyStatus();
     settingsModal.classList.add('active');
   });
 
   closeSettingsModal?.addEventListener('click', () => {
     settingsModal.classList.remove('active');
-  });
-
-  saveApiKeyBtn?.addEventListener('click', () => {
-    const val = apiKeyInput.value.trim();
-    window.GeminiEngine.setApiKey(val);
-    checkApiKeyStatus();
-    showToast('تم حفظ إعدادات مفتاح Gemini AI بنجاح!');
-  });
-
-  function checkApiKeyStatus() {
-    if (!apiKeyStatus) return;
-    const hasKey = window.GeminiEngine.hasApiKey();
-    if (hasKey) {
-      apiKeyStatus.innerHTML = `<span class="badge badge-success">✓ الذكاء الاصطناعي مفعّل (Gemini Flash)</span>`;
-    } else {
-      apiKeyStatus.innerHTML = `<span class="badge badge-neutral">المترجم يعمل بالوضع الأساسي المجاني (أضف المفتاح لتفعيل الكاميرا والترجمة الذكية)</span>`;
-    }
-  }
-
-  function loadSettings() {
-    const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_SETTINGS) || '{}');
-    if (adClientInput) {
-      adClientInput.value = settings.adClient || 'ca-pub-9564340004388044';
-    }
-  }
-
-  saveAdSettingsBtn?.addEventListener('click', () => {
-    const adClient = adClientInput?.value.trim() || '';
-
-    const settings = { adClient };
-    localStorage.setItem(CONFIG.STORAGE_SETTINGS, JSON.stringify(settings));
-
-    showToast('تم حفظ معرف Google AdSense بنجاح!');
   });
 
   // --- PDF Translation & Rewarded Ads ---
