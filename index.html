@@ -2956,36 +2956,100 @@ document.addEventListener('DOMContentLoaded', () => {
     translateBtn.disabled = isLoading;
   }
 
-  // --- Text-to-Speech (Audio Pronunciation) ---
+  // --- Text-to-Speech (Audio Pronunciation - Dual Engine: Cloud Natural Voice + Browser Fallback) ---
+  let currentSpeechAudio = null;
+
   function speakText(text, langCode) {
-    if (!('speechSynthesis' in window)) {
-      showToast('المتصفح لا يدعم نطق الصوت');
-      return;
-    }
-    if (!text) {
+    if (!text || !text.trim()) {
       showToast('لا يوجد نص للنطق');
       return;
     }
 
-    window.speechSynthesis.cancel(); // Stop any ongoing speech
+    // Stop any ongoing cloud audio or browser speech
+    if (currentSpeechAudio) {
+      try {
+        currentSpeechAudio.pause();
+        currentSpeechAudio.currentTime = 0;
+      } catch(e) {}
+      currentSpeechAudio = null;
+    }
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Map lang codes
-    const speechLangMap = {
-      'ar': 'ar-SA',
-      'en': 'en-US',
-      'fr': 'fr-FR',
-      'de': 'de-DE',
-      'auto': /[\u0600-\u06FF]/.test(text) ? 'ar-SA' : 'en-US'
-    };
+    if ('speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch(e) {}
+    }
 
-    utterance.lang = speechLangMap[langCode] || 'ar-SA';
-    utterance.rate = currentSpeechRate || 0.95;
-    utterance.pitch = 1.0;
+    const cleanText = text.trim();
+    let cleanLang = langCode || 'ar';
+    if (cleanLang === 'auto') {
+      cleanLang = /[\u0600-\u06FF]/.test(cleanText) ? 'ar' : 'en';
+    }
 
-    window.speechSynthesis.speak(utterance);
-    showToast('جاري نطق النص...');
+    // 1. Try High-Quality Natural Cloud Audio (Google TTS engine - Works on all devices including PC without voice packs)
+    try {
+      const encodedText = encodeURIComponent(cleanText.slice(0, 250));
+      const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=${cleanLang}&client=tw-ob`;
+      const audio = new Audio(ttsUrl);
+      currentSpeechAudio = audio;
+
+      let started = false;
+      audio.onplay = () => {
+        started = true;
+        showToast('جاري نطق النص بصوت نقي...');
+      };
+
+      audio.onerror = () => {
+        if (!started) fallbackBrowserSpeech(cleanText, cleanLang);
+      };
+
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          fallbackBrowserSpeech(cleanText, cleanLang);
+        });
+      }
+      return;
+    } catch (err) {
+      fallbackBrowserSpeech(cleanText, cleanLang);
+    }
+  }
+
+  // 2. Fallback Browser Native Speech Synthesis Engine
+  function fallbackBrowserSpeech(text, langCode) {
+    if (!('speechSynthesis' in window)) {
+      showToast('المتصفح لا يدعم نطق الصوت');
+      return;
+    }
+
+    try {
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.resume();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      const speechLangMap = {
+        'ar': 'ar-SA',
+        'en': 'en-US',
+        'fr': 'fr-FR',
+        'de': 'de-DE'
+      };
+
+      utterance.lang = speechLangMap[langCode] || (langCode === 'ar' ? 'ar-SA' : 'en-US');
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const matchingVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(langCode.toLowerCase()));
+        if (matchingVoice) utterance.voice = matchingVoice;
+      }
+
+      utterance.onstart = () => showToast('جاري نطق النص...');
+      utterance.onerror = (e) => console.warn('SpeechSynthesis error:', e);
+
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.error('TTS failed:', e);
+      showToast('تعذر نطق النص حالياً');
+    }
   }
 
   speakSourceBtn.addEventListener('click', () => {
