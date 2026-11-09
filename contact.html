@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتصل بنا | A-A Translate</title>
+  <meta name="description" content="تواصل مع فريق الدعم والمطور المسؤول لمنصة الترجمة A-A Translate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <style>
+    :root {
+      --bg-primary: #0a0f1d;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-primary: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%);
+      --font-main: 'Cairo', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.8;
+      padding: 24px 16px;
+      direction: rtl;
+    }
+    .page-container { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .nav-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 20px; background: var(--bg-card);
+      border: 1px solid var(--border-color); border-radius: 16px;
+    }
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 800; background: var(--accent-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none;
+    }
+    .back-btn {
+      color: var(--text-primary); text-decoration: none; font-size: 0.9rem; font-weight: 700;
+      background: rgba(255, 255, 255, 0.06); padding: 8px 16px; border-radius: 9999px;
+      border: 1px solid var(--border-color); transition: 0.2s ease;
+    }
+    .back-btn:hover { background: rgba(99, 102, 241, 0.2); border-color: var(--accent-primary); }
+    .content-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 32px 24px; }
+    h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; border-bottom: 2px solid rgba(99, 102, 241, 0.3); padding-bottom: 12px; }
+    h2 { font-size: 1.2rem; color: var(--accent-primary); margin: 24px 0 10px 0; }
+    p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 12px; text-align: justify; }
+    .contact-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .contact-item span { font-size: 1.2rem; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    label { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+    input, textarea {
+      width: 100%; padding: 12px 14px; background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-color); border-radius: 10px;
+      color: #fff; font-family: inherit; font-size: 0.95rem; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent-primary); }
+    .submit-btn {
+      background: var(--accent-gradient); color: #fff; border: none;
+      padding: 14px 24px; border-radius: 10px; font-family: inherit;
+      font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s ease;
+    }
+    .submit-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .footer { text-align: center; padding: 20px 0; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid var(--border-color); }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <header class="nav-header">
+      <a href="./index.html" class="nav-logo">A-A Translate</a>
+      <a href="./index.html" class="back-btn">⬅ العودة للمترجم الرئيسي</a>
+    </header>
+
+    <main class="content-card">
+      <h1>📬 اتصل بنا (Contact Us)</h1>
+      <p>
+        نحن هنا دائماً لخدمتك والرد على كافة استفساراتك، ومساعدتك في حل أي مشكلة تقنية، أو الاستماع إلى مقترحاتك لتطوير المنصة.
+      </p>
+
+      <div class="contact-box">
+        <div class="contact-item">
+          <span>📧</span>
+          <div>
+            <strong>البريد الإلكتروني المباشر للدعم الفني:</strong>
+            <p style="margin:0; direction:ltr; text-align:right;"><a href="mailto:support.aatranslate@gmail.com" style="color:var(--accent-primary); font-weight:700;">support.aatranslate@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span>👨‍💻</span>
+          <div>
+            <strong>المطور المشرف:</strong>
+            <p style="margin:0;">Ahmed Alaa - فريق تطوير وإدارة منصة A-A Translate</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span>⏱️</span>
+          <div>
+            <strong>أوقات الرد:</strong>
+            <p style="margin:0;">خلال 24 إلى 48 ساعة كحد أقصى على مدار أيام الأسبوع.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>أرسل لنا رسالة مباشرة</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('شكراً لتواصلك معنا! تم استلام رسالتك وسنقوم بالرد عليك في أقرب وقت.'); this.reset();">
+        <div class="form-group">
+          <label>الاسم بالكامل:</label>
+          <input type="text" placeholder="اكتب اسمك الكريم..." required>
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني:</label>
+          <input type="email" placeholder="example@domain.com" required>
+        </div>
+        <div class="form-group">
+          <label>موضوع الرسالة:</label>
+          <input type="text" placeholder="اقتراح، بلاغ عن مشكلة، استفسار..." required>
+        </div>
+        <div class="form-group">
+          <label>نص الرسالة:</label>
+          <textarea rows="5" placeholder="اكتب تفاصيل رسالتك هنا..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">إرسال الرسالة الآن 🚀</button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <p>جميع الحقوق محفوظة &copy; 2026 A-A Translate &bull; تطوير: Ahmed Alaa</p>
+    </footer>
+  </div>
+</body>
+</html>
